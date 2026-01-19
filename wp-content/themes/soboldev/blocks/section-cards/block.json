@@ -1,0 +1,31 @@
+{
+	"apiVersion": 2,
+	"textdomain": "soboldev",
+	"name": "theme/section-cards",
+	"title": "Section Cards",
+	"description": "Cards section.",
+	"style": "file:style.scss",
+	"editorStyle": "file:style-editor.scss",
+	"script": "file:script.js",
+	"editorScript": "file:script-editor.js",
+	"category": "theme",
+	"icon": "grid-view",
+	"keywords": ["card"],
+	"example": {
+		"attributes": {
+			"preview": true,
+			"data": {}
+		}
+	},
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "template.php",
+		"default_settings": {},
+		"postTypes": ["page", "post"]
+	},
+	"supports": {
+		"anchor": true,
+		"customClassName": true,
+		"multiple": true
+	}
+}

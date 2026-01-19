@@ -1,0 +1,39 @@
+@import "styles.scss";
+
+div.wp-block-post-content {
+	@extend %body;
+
+	.wp-block {
+		clear: both;
+		margin-left: unset;
+		margin-right: unset;
+	}
+
+	[class*="wp-block-theme"] {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.container {
+		z-index: calc(var(--base-z-index) + 1);
+	}
+
+	.subtitle {
+		padding-left: 0;
+		color: currentColor;
+	}
+}
+
+@media (min-width: 782px) {
+	.interface-complementary-area {
+		width: 470px !important;
+
+		&__fill {
+			width: auto !important;
+		}
+	}
+}
+
+.block-editor-block-list__layout .wp-block {
+	max-width: 100%;
+}

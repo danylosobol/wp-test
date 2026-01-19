@@ -1,0 +1,16 @@
+@use "~css/_mixins.scss" as *;
+
+.theme-section-cards {
+	padding: #{toRem(95px)} 0;
+
+	.title {
+		text-align: center;
+		margin-bottom: var(--theme-xxl-space);
+	}
+
+	.blocks {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--theme-md-space);
+	}
+}

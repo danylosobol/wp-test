@@ -1,0 +1,32 @@
+{
+	"apiVersion": 2,
+	"textdomain": "soboldev",
+	"name": "theme/card",
+	"title": "Card",
+	"description": "Card block.",
+	"style": "file:style.scss",
+	"editorStyle": "file:style-editor.scss",
+	"script": "file:script.js",
+	"editorScript": "file:script-editor.js",
+	"category": "theme",
+	"icon": "editor-table",
+	"keywords": ["card"],
+	"example": {
+		"attributes": {
+			"preview": true,
+			"data": {}
+		}
+	},
+	"parent": "theme/section-cards",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "template.php",
+		"default_settings": {},
+		"postTypes": ["page", "post"]
+	},
+	"supports": {
+		"anchor": true,
+		"customClassName": true,
+		"multiple": true
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"cSpell.enabled": true,
+	"cSpell.allowCompoundWords": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+	"files.exclude": {
+		"**/.git": true,
+	},
+	"files.watcherExclude": {
+			"**/.git/objects/**": true,
+			"**/.git/subtree-cache/**": true,
+			"**/node_modules/*/**": true,
+			"**/vendor/*/**": true,
+			"**/vendor-temp/*/**": true,
+			"wp-content/plugins/": true,
+			"wp-content/uploads": true,
+	}
+}

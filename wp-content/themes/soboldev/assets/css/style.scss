@@ -1,0 +1,5 @@
+@import "styles.scss";
+
+body.page, body.archive, body.blog, body.single, body.home, body.error404 {
+	@extend %body;
+}

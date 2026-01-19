@@ -1,0 +1,151 @@
+@use "~css/_mixins.scss" as *;
+
+@mixin property-card {
+	.theme-property-card {
+		--meters-icon: #{svg-encode(
+				'<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5246 10.4172L6.05389 10.8889L4.27557 12.6672H5.95721V14.0002H2.6662C2.29807 14.0002 1.9993 13.7014 1.99921 13.3333V10.0422H3.33221V11.7239L5.11053 9.94556L5.58221 9.47485L6.5246 10.4172ZM10.8898 9.94556L12.6682 11.7239V10.0422H14.0012V13.3333C14.0011 13.7013 13.7022 14.0002 13.3342 14.0002H10.0432V12.6672H11.7248L9.94647 10.8889L9.47577 10.4172L10.4182 9.47485L10.8898 9.94556ZM5.89081 3.26685H4.11444L6.00604 5.15942L6.43085 5.58325L5.58221 6.43188L5.15839 6.00708L3.26581 4.11548V5.89185H2.06561V2.66724C2.06561 2.33587 2.33483 2.06665 2.6662 2.06665H5.89081V3.26685ZM13.3342 2.06665C13.6655 2.06674 13.9348 2.33592 13.9348 2.66724V5.89185H12.7346V4.11548L10.842 6.00708L10.4182 6.43188L9.56952 5.58325L9.99432 5.15942L11.8859 3.26685H10.1096V2.06665H13.3342Z" fill="#212121"/></svg>'
+			)};
+		--rooms-icon: #{svg-encode(
+				'<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.33333 8V8.00667M2 14H14M4 14V3.33333C4 2.97971 4.14048 2.64057 4.39052 2.39052C4.64057 2.14048 4.97971 2 5.33333 2H10.6667C11.0203 2 11.3594 2.14048 11.6095 2.39052C11.8595 2.64057 12 2.97971 12 3.33333V14" stroke="#212121" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/></svg>'
+			)};
+		--floors-icon: #{svg-encode(
+				'<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_3_880)"><path d="M14.6673 3.3335H11.334V6.66683H8.00065V10.0002H4.66732V13.3335H1.33398" stroke="#212121" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/></g><defs><clipPath id="clip0_3_880"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>'
+			)};
+
+		.inner {
+			padding: var(--theme-xs-space);
+			display: flex;
+			background-color: var(--theme-surface-darker);
+			border-radius: var(--theme-sm-radius);
+			flex-direction: column;
+			@include breakpoint(md) {
+				flex-direction: row;
+			}
+		}
+
+		.price {
+			font-size: var(--theme-lg-body-fs);
+			margin: 0;
+			line-height: var(--theme-xs-lh);
+		}
+
+		.price,
+		.address,
+		.list {
+			color: var(--theme-g400);
+		}
+
+		.list,
+		.per-meter,
+		.excerpt {
+			font-size: var(--theme-xxs-body-fs);
+		}
+
+		.address {
+			font-size: var(--theme-xs-body-fs);
+			font-style: normal;
+			font-weight: bold;
+		}
+
+		.image {
+			aspect-ratio: 320/252;
+			flex-shrink: 0;
+			line-height: 0;
+			background-color: #e2e2e2; //??
+			border-radius: var(--theme-xs-radius);
+			overflow: hidden;
+			@include breakpoint(md) {
+				width: clamp(#{toRem(200px)}, 25%, #{toRem(300px)});
+				aspect-ratio: 300/277;
+			}
+			img {
+				aspect-ratio: 300/277;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.excerpt {
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: var(--theme-xl-lh);
+		}
+
+		.meta {
+			padding: var(--theme-md-space) #{toRem(20px)} var(--theme-lg-space) #{toRem(
+					20px
+				)};
+			--element-space-y: var(--theme-md-space);
+
+			@include breakpoint(md) {
+				padding: var(--theme-lg-space) var(--theme-xl-space)
+					var(--theme-lg-space) var(--theme-lg-space);
+			}
+		}
+
+		.header-card {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			align-items: flex-end;
+			gap: var(--theme-sm-space);
+			margin-bottom: var(--theme-sm-space);
+		}
+
+		.per-meter {
+			font-size: var(--theme-xxs-body-fs);
+			color: var(--theme-g100);
+			margin: 0;
+		}
+
+		.list {
+			display: flex;
+			flex-direction: column;
+			gap: var(--theme-sm-space);
+			--icon-size: #{toRem(16px)};
+			--space-between: #{toRem(5px)};
+			li {
+				margin: 0;
+				padding-left: calc(var(--icon-size) + var(--space-between));
+				position: relative;
+
+				&.meters {
+					--icon: var(--meters-icon);
+				}
+
+				&.rooms {
+					--icon: var(--rooms-icon);
+				}
+
+				&.floors {
+					--icon: var(--floors-icon);
+				}
+
+				&::before {
+					content: "";
+					display: block;
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					width: var(--icon-size);
+					height: var(--icon-size);
+					background-color: currentColor;
+					mask-image: var(--icon);
+					mask-size: contain;
+					mask-repeat: no-repeat;
+					mask-position: center;
+				}
+			}
+		}
+
+		.link {
+			font-size: #{toRem(13px)};
+			font-weight: 700;
+		}
+	}
+}

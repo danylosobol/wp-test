@@ -1,0 +1,53 @@
+@use "~css/_mixins.scss" as *;
+@use "~css/template-parts/property-card" as *;
+
+.theme-section-properties {
+	padding: #{toRem(95px)} 0;
+	@include property-card();
+
+	.title {
+		margin-bottom: var(--theme-xxl-space);
+	}
+
+	.button-wrapper,
+	.title {
+		text-align: center;
+	}
+
+	.button-wrapper {
+		margin-top: var(--theme-md-space);
+	}
+
+	.blocks,
+	.header {
+		display: flex;
+	}
+
+	.blocks {
+		flex-direction: column;
+		gap: var(--theme-md-space);
+	}
+
+	.header {
+		display: flex;
+		gap: var(--theme-lg-space);
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: var(--theme-md-space);
+	}
+
+	.sort-button {
+		font-size: #{toRem(13px)};
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.load-more:disabled {
+		display: none;
+	}
+
+	.total {
+		font-size: var(--theme-sm-body-fs);
+		color: var(--theme-g100);
+	}
+}

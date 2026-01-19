@@ -1,0 +1,85 @@
+@use "~css/_mixins.scss" as *;
+
+:root {
+	//Theme font family
+	--theme-font-family: "Manrope", sans-serif;
+
+	//Theme typography
+	//Theme font sizes
+	--theme-h2-fs: #{toRem(32px)};
+	--theme-h3-fs: #{toRem(24px)};
+	--theme-h4-fs: #{toRem(24px)};
+	--theme-h5-fs: #{toRem(24px)};
+	--theme-h6-fs: #{toRem(24px)};
+
+	--theme-base-body-fs: #{toRem(18px)};
+	--theme-lg-body-fs: #{toRem(20px)};
+	--theme-md-body-fs: #{toRem(16px)};
+	--theme-sm-body-fs: #{toRem(14px)};
+	--theme-xs-body-fs: #{toRem(12px)};
+	--theme-xxs-body-fs: #{toRem(11px)};
+
+	//Theme line heights
+	--theme-xl-lh: 1.48;
+	--theme-lg-lh: 1.25;
+	--theme-md-lh: 1.2;
+	--theme-sm-lh: 1.16;
+	--theme-xs-lh: 1.13;
+
+	//Theme colors
+	--theme-g50: #e9e9e9;
+	--theme-g60: #cdceca;
+	--theme-g75: #a4a4a4;
+	--theme-g100: #7e7e7e;
+	--theme-g200: #474747;
+	--theme-g300: #2e2e2e;
+	--theme-g400: #212121;
+	--theme-g500: #141414;
+	--theme-surface-bg: #f3f4f1;
+	--theme-surface-white: #ffffff;
+	--theme-surface-darker: #edebe7;
+	--theme-surface-dark: #e5e1da;
+	--theme-surface-lighter: #f9f9f9;
+
+	//Theme transition
+	--theme-transition-time: 0.4s;
+	--theme-transition: var(--theme-transition-time) ease;
+
+	//Theme container sizes
+	--theme-container-width: #{toRem(1300px)};
+	--theme-container-padding: #{toRem(15px)};
+
+	//Theme border radius
+	--theme-md-radius: #{toRem(24px)};
+	--theme-sm-radius: #{toRem(18px)};
+	--theme-xs-radius: #{toRem(10px)};
+
+	--theme-xxl-space: #{toRem(50px)};
+	--theme-xl-space: #{toRem(32px)};
+	--theme-lg-space: #{toRem(24px)};
+	--theme-md-space: #{toRem(16px)};
+	--theme-sm-space: #{toRem(8px)};
+	--theme-xs-space: #{toRem(4px)};
+
+	//Theme shadow
+	@include breakpoint(md) {
+		--theme-h2-fs: #{toRem(48px)};
+		--theme-h3-fs: #{toRem(42px)};
+		--theme-h4-fs: #{toRem(32px)};
+		--theme-h5-fs: #{toRem(28px)};
+		--theme-h6-fs: #{toRem(26px)};
+	}
+	@include breakpoint(lg) {
+	}
+	@include breakpoint(xl) {
+	}
+}
+
+@include initFonts(
+	"Manrope",
+	(
+		"Bold": 700,
+		"SemiBold": 600,
+		"Regular": 400,
+	)
+);

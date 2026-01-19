@@ -1,0 +1,264 @@
+@use "~css/_mixins.scss" as *;
+@import "normalize.css/normalize.css";
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+%body {
+	font: 400 var(--theme-base-body-fs) / var(--theme-xl-lh)
+		var(--theme-font-family);
+	background-color: var(--theme-surface-white);
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	ul,
+	li,
+	ol,
+	figure,
+	blockquote,
+	table,
+	iframe,
+	.wp-block-buttons {
+		margin-block: var(--element-space-y, var(--theme-lg-space));
+	}
+
+	img,
+	picture,
+	video,
+	iframe {
+		max-width: 100%;
+		height: auto;
+		object-fit: contain;
+	}
+
+	ul,
+	ol {
+		li {
+			&:first-of-type {
+				margin-top: 0;
+			}
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	a {
+		color: inherit;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	.theme-h1,
+	.theme-h2,
+	.theme-h3,
+	.theme-h4,
+	.theme-h5,
+	.theme-h6 {
+		line-height: var(--theme-md-lh);
+	}
+
+	h1,
+	.theme-h1 {
+		font-size: var(--theme-h2-fs);
+	}
+
+	h2,
+	.theme-h2 {
+		font-size: var(--theme-h2-fs);
+	}
+
+	h3,
+	.theme-h3 {
+		font-size: var(--theme-h3-fs);
+	}
+
+	h4,
+	.theme-h4 {
+		font-size: var(--theme-h4-fs);
+	}
+
+	h5,
+	.theme-h5 {
+		font-size: var(--theme-h5-fs);
+	}
+
+	h6,
+	.theme-h6 {
+		font-size: var(--theme-h6-fs);
+	}
+
+	.no {
+		&-list {
+			list-style: none;
+			padding-left: 0;
+		}
+
+		&-text {
+			&-decoration {
+				text-decoration: none;
+			}
+		}
+
+		&-margin {
+			margin: 0;
+		}
+
+		&-btn {
+			border: 0;
+			background: transparent;
+			padding: 0;
+			text-align: left;
+		}
+	}
+
+	[class*="theme-button"] {
+		cursor: pointer;
+		display: inline-block;
+		padding: var(--button-space-y, #{toRem(16px)})
+			var(--button-space-x, #{toRem(20px)});
+		text-align: center;
+		font-weight: 700;
+		font-size: var(--button-fs, var(--theme-base-body-fs));
+		border-radius: var(--button-radius, calc(var(--theme-radius) * 2));
+		transition: background-color var(--theme-transition),
+			color var(--theme-transition), border-color var(--theme-transition);
+		color: var(--button-text-color, var(--theme-base-light));
+		border: 1px solid var(--button-border-color, transparent);
+		background-color: var(--button-background-color, var(--theme-primary));
+		min-width: var(--button-width,  auto);
+		border-radius: var(--button-radius, #{toRem(45px)});
+
+		@include breakpoint(xl) {
+			--button-width: #{toRem(218px)};
+		}
+	}
+
+	%theme {
+		&-container {
+			max-width: calc(
+				var(--theme-container-width) + (var(--theme-container-padding) * 2)
+			);
+			padding: 0 var(--theme-container-padding);
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		&-column-element {
+			--total-columns: 12;
+			--column-gap: var(--theme-md-space);
+			--columns: 12;
+			--col-width: calc(
+				(100% - (var(--total-columns) - 1) * var(--column-gap)) /
+					var(--total-columns)
+			);
+			width: calc(
+				var(--col-width) * var(--columns) + (var(--columns) - 1) *
+					var(--column-gap)
+			);
+		}
+
+		&-text-element {
+			> :first-child {
+				margin-top: 0;
+			}
+
+			> :last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		&-button {
+			&-primary {
+				--button-text-color: var(--theme-surface-white);
+				--button-background-color: var(--theme-g500);
+				--button-border-color: var(--theme-g500);
+				@media (any-hover: hover) {
+					&:hover {
+						--button-text-color: var(--theme-g500);
+						--button-background-color: var(--theme-surface-white);
+						--button-border-color: var(--theme-g500);
+					}
+				}
+			}
+			&-secondary {
+				--button-text-color: var(--theme-g500);
+				--button-background-color: var(--theme-surface-white);
+				--button-border-color: var(--theme-surface-white);
+				@media (any-hover: hover) {
+					&:hover {
+						--button-text-color: var(--theme-surface-white);
+						--button-background-color: var(--theme-g500);
+						--button-border-color: var(--theme-g500);
+					}
+				}
+			}
+		}
+	}
+
+	.theme {
+		&-container {
+			@extend %theme-container;
+		}
+
+		&-column-element {
+			@extend %theme-column-element;
+		}
+
+		&-button {
+			&-primary {
+				@extend %theme-button-primary;
+			}
+			&-secondary {
+				@extend %theme-button-secondary;
+			}
+		}
+
+		&-text-element {
+			@extend %theme-text-element;
+		}
+	}
+
+	.wp-block-button {
+		&:has(.wp-block-button__link.has-text-align-center) {
+			text-align: center;
+		}
+
+		&:has(.wp-block-button__link.has-text-align-right) {
+			text-align: right;
+		}
+
+		&:not(.is-style-outline) {
+			.wp-block-button__link {
+				@extend .theme-button-primary;
+			}
+		}
+
+		&.is-style-outline {
+			.wp-block-button__link {
+				@extend .theme-button-secondary;
+			}
+		}
+	}
+
+	.wp-block-button__link {
+		@extend [class*="theme-button"];
+	}
+
+	#wpadminbar {
+		display: none;
+	}
+}

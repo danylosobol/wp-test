@@ -1,0 +1,36 @@
+@use "~css/styles" as *;
+
+div.wp-block-post-content {
+	@import "styles.scss";
+
+	.wp-block-theme-card {
+		--total-columns: 12;
+		--column-gap: var(--theme-md-space);
+		--columns: 12;
+		--col-width: calc(
+			(100% - (var(--total-columns) - 1) * var(--column-gap)) /
+				var(--total-columns)
+		);
+		width: calc(
+			var(--col-width) * var(--columns) + (var(--columns) - 1) *
+				var(--column-gap)
+		);
+
+		&:has(.size-large) {
+			--columns: 8;
+		}
+
+		&:has(.size-medium) {
+			--columns: 6;
+		}
+
+		&:has(.size-small) {
+			--columns: 4;
+		}
+
+		.theme-card{
+			--columns: 12;
+			height: 100%;
+		}
+	}
+}

@@ -1,0 +1,69 @@
+{
+	"type": "project",
+	"name": "soboldev/wp-theme",
+	"description": "Wordpress theme starter kit.",
+	"license": "Commerce",
+	"authors": [
+		{
+			"name": "Soboldev"
+		}
+	],
+	"autoload": {},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true,
+			"ffraenz/private-composer-installer": true
+		},
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"sort-packages": true,
+		"vendor-dir": "wp-content/themes/soboldev/vendor"
+	},
+	"extra": {
+		"installer-paths": {
+			"wp-content/mu-plugins/{$name}/": [
+				"type:wordpress-muplugin",
+				"wpackagist-plugin/safe-svg",
+				"wpengine/advanced-custom-fields-pro"
+			],
+			"wp-content/plugins/{$name}/": [
+				"type:wordpress-plugin"
+			],
+			"wp-content/themes/{$name}/": [
+				"type:wordpress-theme"
+			],
+			"wp-content/{$name}/": [
+				"type:wordpress-dropin"
+			]
+		},
+		"wordpress-install-dir": "wordpress"
+	},
+	"scripts": {
+		"post-root-package-install": [
+			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+		],
+		"post-install-cmd": [],
+		"post-update-cmd": [],
+		"pre-install-cmd": []
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		},
+		{
+			"type": "composer",
+			"url": "https://connect.advancedcustomfields.com"
+		}
+	],
+	"require": {
+		"php": ">=8.0",
+		"wpengine/advanced-custom-fields-pro": "6.3.9",
+		"composer/installers": "^1.0 || ^2.0",
+		"ffraenz/private-composer-installer": "^5.0",
+		"wpackagist-plugin/safe-svg": "2.2.5"
+	},
+	"require-dev": {}
+}

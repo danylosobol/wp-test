@@ -1,0 +1,112 @@
+@use "~css/_mixins.scss" as *;
+
+.theme-card {
+	--border-radius: var(--theme-md-radius);
+	border-radius: var(--border-radius);
+	background-color: var(--card-background-color);
+
+	&.color-g400 {
+		--card-background-color: var(--theme-g400);
+		--card-text-color: var(--theme-surface-darker);
+		--card-title-color: var(--theme-surface-white);
+	}
+
+	&.color-darker,
+	&.color-dark,
+	&.color-lighter {
+		--card-title-color: var(--theme-g400);
+		--card-text-color: var(--theme-g300);
+	}
+
+	&.color-dark {
+		--card-background-color: var(--theme-surface-dark);
+	}
+
+	&.color-darker {
+		--card-background-color: var(--theme-surface-darker);
+	}
+
+	&.color-lighter {
+		--card-background-color: var(--theme-surface-lighter);
+	}
+
+	&.size-small {
+		@include breakpoint(md) {
+			--columns: 4;
+		}
+	}
+
+	&.size-medium {
+		@include breakpoint(md) {
+			--columns: 6;
+		}
+	}
+
+	&.size-large {
+		@include breakpoint(md) {
+			--columns: 8;
+		}
+	}
+
+	&.type-image-right {
+		--image-ratio: 430/324;
+		--image-radius: 0 0 var(--border-radius) var(--border-radius);
+
+		@include breakpoint(md) {
+			--block-direction: row;
+			--image-radius: 0 var(--border-radius) var(--border-radius) 0;
+			--image-width: 50%;
+		}
+	}
+
+	&.type-image-bottom {
+		--image-ratio: 642/224;
+		--image-radius: 0 0 var(--border-radius) var(--border-radius);
+		@include breakpoint(md) {
+			.text-wrapper {
+				padding-bottom: #{toRem(64px)};
+			}
+		}
+	}
+
+	p {
+		color: var(--card-text-color);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 600;
+		color: var(--card-title-color);
+	}
+
+	.text-wrapper {
+		padding: var(--theme-lg-space);
+		@include breakpoint(lg) {
+			padding: var(--theme-xl-space);
+		}
+	}
+
+	.image {
+		line-height: 0;
+		flex-grow: 1;
+		flex-shrink: 0;
+		width: var(--image-width, auto);
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			aspect-ratio: var(--image-ratio, 16/9);
+			border-radius: var(--image-radius);
+		}
+	}
+
+	.inner {
+		height: 100%;
+		display: flex;
+		flex-direction: var(--block-direction, column);
+	}
+}
