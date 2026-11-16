@@ -42,8 +42,9 @@
 	},
 	"scripts": {
 		"post-root-package-install": [
-			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+			"@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
 		],
+		"acf-auth": "@php scripts/composer-acf-auth.php",
 		"post-install-cmd": [],
 		"post-update-cmd": [],
 		"pre-install-cmd": []
@@ -60,10 +61,10 @@
 	],
 	"require": {
 		"php": ">=8.0",
-		"wpengine/advanced-custom-fields-pro": "6.3.9",
-		"composer/installers": "^1.0 || ^2.0",
-		"ffraenz/private-composer-installer": "^5.0",
-		"wpackagist-plugin/safe-svg": "2.2.5"
+		"wpengine/advanced-custom-fields-pro": "6.8.11",
+		"composer/installers": "^2.3",
+		"ffraenz/private-composer-installer": "^5.0.1",
+		"wpackagist-plugin/safe-svg": "2.5.2"
 	},
 	"require-dev": {}
 }

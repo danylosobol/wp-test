@@ -9,8 +9,13 @@ RUN set -ex; \
 
 RUN set -eux; \
 	curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer; \
-	curl --silent --show-error -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli-nightly.phar && chmod +x /usr/local/bin/wp; \
-	/usr/local/bin/wp package install git@github.com:trepmal/wp-revisions-cli.git --allow-root; \
+	curl --silent --show-error -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
+	# Wrapper: keeps PHP notices of WP-CLI itself out of stdout so `--format=json` output stays parseable on new PHP versions.
+	printf '#!/bin/sh\nexec php -d display_errors=stderr -d error_reporting="E_ALL & ~E_DEPRECATED" /usr/local/bin/wp-cli.phar "$@"\n' > /usr/local/bin/wp; \
+	chmod +x /usr/local/bin/wp /usr/local/bin/wp-cli.phar; \
+	# No SSH keys inside the build: fetch GitHub sources over HTTPS.
+	git config --global url."https://github.com/".insteadOf "git@github.com:"; \
+	/usr/local/bin/wp package install trepmal/wp-revisions-cli --allow-root; \
 	npm install -g yarn; \
 	composer global require "squizlabs/php_codesniffer=*"
 

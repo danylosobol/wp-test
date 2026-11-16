@@ -1,31 +1,30 @@
 import { defineConfig } from "vite"
-import { fileURLToPath, URL } from "url";
+import { fileURLToPath, URL } from "url"
 import alias from "@rollup/plugin-alias"
 import autoprefixer from "autoprefixer"
 import fs from "fs"
 import dotenv from "dotenv"
-import glob from "glob"
 import svgr from "vite-plugin-svgr"
-// import { dependencies } from "./package.json"
-import reactRefresh from "@vitejs/plugin-react-refresh"
-import handlebars from 'vite-plugin-handlebars';
-import replace from '@rollup/plugin-replace';
+import react from "@vitejs/plugin-react"
+import handlebars from "vite-plugin-handlebars"
+import replace from "@rollup/plugin-replace"
 
-dotenv.config()
+dotenv.config({ quiet: true })
 
 const themeRoot = "wp-content/themes/soboldev"
 const prod = (process.env.SITE_ENV == "production")
-// https://vitejs.dev/config
+// https://vite.dev/config/
 export default defineConfig({
 	define: { global: "globalThis" },
-	assetsInclude: ['**/*.hbs'],
+	assetsInclude: ["**/*.hbs"],
 	plugins: [
 		alias(),
 		handlebars(),
-		reactRefresh(),
-		svgr({ svgrOptions: { exportType: "default", }, }),
-		...(!prod ? [await import("vite-plugin-live-reload").then((module) => module.liveReload(__dirname + themeRoot + "/**/*.{php,js,jsx,css,json,scss}"))] : []),
+		react(),
+		svgr({ svgrOptions: { exportType: "default" } }),
+		...(!prod ? [await import("vite-plugin-live-reload").then((module) => module.liveReload(import.meta.dirname + "/" + themeRoot + "/**/*.{php,js,jsx,css,json,scss}"))] : []),
 		replace({
+			preventAssignment: true,
 			...(!prod ? {} : {
 				"static DEBUG = true": "static DEBUG = false",
 			}),
@@ -34,9 +33,9 @@ export default defineConfig({
 	css: {
 		postcss: {
 			plugins: [
-				autoprefixer({})
+				autoprefixer({}),
 			],
-		}
+		},
 	},
 	resolve: {
 		alias: [
@@ -59,7 +58,7 @@ export default defineConfig({
 			{
 				find: "~assets",
 				replacement: fileURLToPath(new URL(themeRoot + "/assets/", import.meta.url)),
-			}
+			},
 		],
 	},
 
@@ -67,16 +66,14 @@ export default defineConfig({
 	mode: prod ? "production" : "development",
 
 	build: {
-		outDir:  themeRoot + "/dist",
+		outDir: themeRoot + "/dist",
 		emptyOutDir: true,
 		manifest: true,
 		target: "es2021",
-		rollupOptions: {
-			// external: [ ...Object.keys(dependencies) ],
-			input: glob
-				.sync(themeRoot + "/blocks/**/*.{css,js,scss}")
-				.concat(glob.sync(themeRoot + "/assets/js/single*.js"))
-				.concat(glob.sync(themeRoot + "/assets/css/single*.scss"))
+		rolldownOptions: {
+			input: fs.globSync(themeRoot + "/blocks/**/*.{css,js,scss}")
+				.concat(fs.globSync(themeRoot + "/assets/js/single*.js"))
+				.concat(fs.globSync(themeRoot + "/assets/css/single*.scss"))
 				.concat([
 					themeRoot + "/assets/js/scripts.js",
 					themeRoot + "/assets/css/style.scss",
@@ -97,14 +94,14 @@ export default defineConfig({
 			fs: { strict: false },
 
 			strictPort: true,
-			port: process.env.DOCKER_VITE_PORT,
+			port: Number(process.env.DOCKER_VITE_PORT),
 
 			https: {
 				key: fs.readFileSync("_docker/nginx/ssl/nginx-selfsigned.key"),
 				cert: fs.readFileSync("_docker/nginx/ssl/nginx-selfsigned.crt"),
 			},
 
-			origin: "https://localhost:" + process.env.DOCKER_VITE_PORT
-		}
+			origin: "https://localhost:" + process.env.DOCKER_VITE_PORT,
+		},
 	} : {}),
 })

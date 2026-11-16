@@ -42,6 +42,8 @@ fi
 wp --allow-root --no-color --skip-themes search-replace http:// https:// --all-tables
 wp --allow-root config set WP_DEBUG true --raw && wp --allow-root config set WP_DEBUG_DISPLAY false --raw && wp --allow-root config set WP_DEBUG_LOG true --raw
 
-wp --allow-root config set ACF_PRO_LICENSE '"b3JkZXJfaWQ9MTU3MjE1fHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOS0wNC0wNCAwNzo0MDozNg=="' --raw
+if [ -n "${ACF_PRO_KEY}" ]; then
+  wp --allow-root config set ACF_PRO_LICENSE "${ACF_PRO_KEY}"
+fi
 
 php-fpm

@@ -11,6 +11,7 @@ wp-content/themes/soboldev/dist/*
 wp-content/themes/soboldev/vendor/*
 * copy*
 .env
+auth.json
 */debug.log
 dump.zip
 uploads.zip
